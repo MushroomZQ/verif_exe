@@ -1,10 +1,10 @@
 `timescale 1ns/1ps
-`include "uvm_macros.svh"
 
-import uvm_pkg::*;
-`include "my_driver.sv"
+`include "my_pkg.sv"
+`include "../rtl/dut.v"
 
 module top_tb;
+    import my_exe_pkg::*;
 
     reg clk;
     reg rst_n;
@@ -13,19 +13,23 @@ module top_tb;
     wire [7:0] txd;
     wire tx_en;
 
+    my_if input_if(clk, rst_n);
+    my_if output_if(clk, rst_n);
+
     dut my_dut(.clk(clk),
                .rst_n(rst_n),
-               .rxd(rxd),
-               .rx_dv(rx_dv),
-               .txd(txd),
-               .tx_en(tx_en)
+               .rxd(input_if.data),
+               .rx_dv(input_if.valid),
+               .txd(output_if.data),
+               .tx_en(output_if.valid)
                 );
 
     initial begin
-        my_driver drv;
-        drv = new("drv", null);
-        drv.main_phase(null);
-        $finish();
+        uvm_config_db#(virtual my_if)::set(uvm_root::get(), "*", "input_if", input_if);
+    end
+
+    initial begin
+        run_test("my_driver");
     end
 
     initial begin

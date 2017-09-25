@@ -10,7 +10,7 @@ module dut(input clk,
 
     always@(posedge clk) begin
         if(!rst_n) begin
-            txd < 8'b0;
+            txd <= 8'b0;
             tx_en <= 1'b0;
         end
         else begin
