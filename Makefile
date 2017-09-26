@@ -1,7 +1,7 @@
 UVM_HOME = /tool/cbar/apps/vcs-mx/2015.09-SP2-10/etc/uvm-1.2
 VERDI_HOME = /tool/cbar/apps/verdi/2015.09-SP2-10
 UVM_VERBOSITY = UVM_LOW
-TEST = my_driver
+TEST = my_env
 
 #VCS =	vcs -sverilog -timescale=1ns/1ns \
 #+acc +vpi -PP \

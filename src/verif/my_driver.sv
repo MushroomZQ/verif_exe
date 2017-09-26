@@ -1,11 +1,13 @@
-class my_driver extends uvm_driver;
+class my_driver extends uvm_driver#(my_transaction);
 
     `uvm_component_utils(my_driver)
 
     virtual my_if vif;
+    my_transaction my_trans;
 
     function new(string name="my_driver", uvm_component parent = null);
         super.new(name, parent);
+        //my_trans = new;
     endfunction
    
     function void build_phase(uvm_phase phase);
@@ -13,6 +15,8 @@ class my_driver extends uvm_driver;
         `uvm_info("my_driver", "build_phase is called", UVM_LOW);
         if(!uvm_config_db#(virtual my_if)::get(uvm_root::get(), "*", "input_if", vif))
             `uvm_fatal("my_driver", "virtual interface must be set for vif")
+
+        //my_trans = my_transaction::type_id::create("my_trans", this);
     endfunction
 
     virtual task main_phase(uvm_phase phase);
@@ -47,7 +51,7 @@ class my_driver extends uvm_driver;
             end
             seq_item_port.get_next_item(req);
                 `uvm_info("my_driver", "get data from seq", UVM_LOW);
-                vif.data <= req.data;
+                vif.data <= my_trans.data;
                 vif.valid <= 1'b1;
                 `uvm_info("my_driver", "data is drived", UVM_LOW);
                 @(posedge vif.clk);
@@ -58,7 +62,7 @@ class my_driver extends uvm_driver;
 
     virtual task rst_dut();
         forever begin
-            @(negedge rst_n);
+            @(negedge vif.rst_n);
             vif.data <= 8'b0;
             vif.valid <= 1'b0;
         end

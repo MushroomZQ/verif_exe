@@ -30,7 +30,7 @@ module top_tb;
     end
 
     initial begin
-        run_test("my_driver");
+        run_test("my_env");
     end
 
     initial begin

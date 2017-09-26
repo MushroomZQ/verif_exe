@@ -5,7 +5,7 @@ class my_transaction extends uvm_sequence_item;
         `uvm_field_int(data, UVM_ALL_ON)
     `uvm_object_utils_end
 
-    function new(string name = "my_transaction")
+    function new(string name = "my_transaction");
         super.new(name);
     endfunction
 

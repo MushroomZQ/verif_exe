@@ -1,6 +1,6 @@
-class my_sqr extends uvm_sequencer#(my_transaction);
+class my_sequencer extends uvm_sequencer#(my_transaction);
 
-    `uvm_component_utils_begin(my_sqr)
+    `uvm_component_utils_begin(my_sequencer)
 
     `uvm_component_utils_end
 
@@ -8,4 +8,4 @@ class my_sqr extends uvm_sequencer#(my_transaction);
         super.new(name, parent);
     endfunction 
 
-endclass: my_sqr
+endclass: my_sequencer
