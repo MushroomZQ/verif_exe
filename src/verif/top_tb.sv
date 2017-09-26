@@ -26,6 +26,7 @@ module top_tb;
 
     initial begin
         uvm_config_db#(virtual my_if)::set(uvm_root::get(), "*", "input_if", input_if);
+        uvm_config_db#(virtual my_if)::set(uvm_root::get(), "*", "output_if", output_if);
     end
 
     initial begin

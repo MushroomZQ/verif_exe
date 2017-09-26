@@ -19,7 +19,7 @@ class my_driver extends uvm_driver;
 
         phase.raise_objection(this);
         `uvm_info("my_driver", "main_phase is called", UVM_LOW);
-        vif.data <= 8'b0;
+        /*vif.data <= 8'b0;
         vif.valid <= 1'b0;
         while(!vif.rst_n) 
             @(posedge vif.clk);
@@ -30,8 +30,39 @@ class my_driver extends uvm_driver;
             `uvm_info("my_driver", "data is drived", UVM_LOW);
         end
         @(posedge vif.clk);
-        vif.valid <= 1'b0;
+        vif.valid <= 1'b0;*/
+        fork
+            get_and_drive();
+            rst_dut();
+        join
         phase.drop_objection(this);
     endtask
+
+    virtual task get_and_drive();
+        forever begin
+            @(posedge vif.clk);
+            if(!vif.rst_n) begin
+                @(posedge vif.rst_n);
+                @(posedge vif.clk);
+            end
+            seq_item_port.get_next_item(req);
+                `uvm_info("my_driver", "get data from seq", UVM_LOW);
+                vif.data <= req.data;
+                vif.valid <= 1'b1;
+                `uvm_info("my_driver", "data is drived", UVM_LOW);
+                @(posedge vif.clk);
+                vif.valid <= 1'b0;
+            seq_item_port.item_done();
+        end
+    endtask: get_and_drive
+
+    virtual task rst_dut();
+        forever begin
+            @(negedge rst_n);
+            vif.data <= 8'b0;
+            vif.valid <= 1'b0;
+        end
+    endtask: rst_dut
+
 endclass: my_driver
 

@@ -35,4 +35,4 @@ verdi:
 	verdi -sv -f filelist -ssf test.fsdb
 
 clean:
-	rm -rf coverage.vdb csrc DVEfiles inter.vpd simv simv.daidir ucli.key vc_hdrs.h vcs.log .inter.vpd.uvm verdiLog driver_direct_testbench novas.rc novas.conf test.fsdb
+	rm -rf coverage.vdb csrc DVEfiles inter.vpd simv simv.daidir ucli.key vc_hdrs.h vcs.log .inter.vpd.uvm verdiLog driver_direct_testbench novas.rc novas.conf test.fsdb vcdplus.vpd
