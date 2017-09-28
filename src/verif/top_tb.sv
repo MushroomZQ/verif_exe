@@ -52,10 +52,11 @@ module top_tb;
         end
     end
 
-    /*initial begin
+    initial begin
+        #100;
         rst_n = 1'b0;
-        #1000;
+        #20;
         rst_n = 1'b1;
-    end*/
+    end
 
 endmodule
