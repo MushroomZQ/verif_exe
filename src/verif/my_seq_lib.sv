@@ -22,12 +22,9 @@ class my_first_seq extends my_base_seq;
         my_trans.data = $urandom();
         `uvm_info("my_first_seq", "send data", UVM_LOW);
         `uvm_send(my_trans);*/
-        `uvm_info("my_first_seq", "create data", UVM_LOW);
        repeat(10) begin
-            `uvm_info("my_first_seq", "randomize data", UVM_LOW);
            `uvm_do(my_trans);
        end
-        `uvm_info("my_first_seq", "send data", UVM_LOW);
        #1000;
     endtask
 

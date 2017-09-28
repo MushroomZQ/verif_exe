@@ -13,8 +13,6 @@ module top_tb;
     wire [7:0] txd;
     wire tx_en;
 
-    int test_bit;
-
     my_if input_if(clk, rst_n);
     my_if output_if(clk, rst_n);
 
@@ -32,10 +30,8 @@ module top_tb;
     end
 
     initial begin
-        test_bit = 10;
         uvm_config_db#(virtual my_if)::set(uvm_root::get(), "", "input_if", input_if);
         uvm_config_db#(virtual my_if)::set(uvm_root::get(), "", "output_if", output_if);
-        uvm_config_db#(int)::set(uvm_root::get(), "", "test_bit", test_bit);
     end
 
     initial begin

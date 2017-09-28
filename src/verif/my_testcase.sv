@@ -20,12 +20,9 @@ class my_testcase extends uvm_test;
 
         phase.raise_objection(this);
         //for(int i=0; i<25; i++) begin
-            `uvm_info("my_test", "start seq", UVM_LOW);
             my_seq.start(tb.env.my_agt.my_sqr);
         //end
-            `uvm_info("my_test", "stop seq", UVM_LOW);
         phase.drop_objection(this);
-            `uvm_info("my_test", "drop done", UVM_LOW);
     endtask
 
 endclass: my_testcase
