@@ -1,7 +1,7 @@
 UVM_HOME = /tool/cbar/apps/vcs-mx/2015.09-SP2-10/etc/uvm-1.2
 VERDI_HOME = /tool/cbar/apps/verdi/2015.09-SP2-10
 UVM_VERBOSITY = UVM_LOW
-TEST = my_env
+TEST = my_testcase
 
 #VCS =	vcs -sverilog -timescale=1ns/1ns \
 #+acc +vpi -PP \
@@ -36,3 +36,4 @@ verdi:
 
 clean:
 	rm -rf coverage.vdb csrc DVEfiles inter.vpd simv simv.daidir ucli.key vc_hdrs.h vcs.log .inter.vpd.uvm verdiLog driver_direct_testbench novas.rc novas.conf test.fsdb vcdplus.vpd
+	ls

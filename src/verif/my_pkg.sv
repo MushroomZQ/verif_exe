@@ -9,4 +9,6 @@ package my_exe_pkg;
     `include "my_driver.sv"
     `include "my_agent.sv"
     `include "my_env.sv"
+    `include "my_tb.sv"
+    `include "my_testcase.sv"
 endpackage: my_exe_pkg

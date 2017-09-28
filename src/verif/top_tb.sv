@@ -13,6 +13,8 @@ module top_tb;
     wire [7:0] txd;
     wire tx_en;
 
+    int test_bit;
+
     my_if input_if(clk, rst_n);
     my_if output_if(clk, rst_n);
 
@@ -25,24 +27,39 @@ module top_tb;
                 );
 
     initial begin
-        uvm_config_db#(virtual my_if)::set(uvm_root::get(), "*", "input_if", input_if);
-        uvm_config_db#(virtual my_if)::set(uvm_root::get(), "*", "output_if", output_if);
+        $fsdbDumpfile("./test.fsdb");
+        $fsdbDumpvars(0, top_tb);
     end
 
     initial begin
-        run_test("my_env");
+        test_bit = 10;
+        uvm_config_db#(virtual my_if)::set(uvm_root::get(), "", "input_if", input_if);
+        uvm_config_db#(virtual my_if)::set(uvm_root::get(), "", "output_if", output_if);
+        uvm_config_db#(int)::set(uvm_root::get(), "", "test_bit", test_bit);
     end
 
     initial begin
-        clk = 0;
+        run_test();
+    end
+
+    assign input_if.clk = clk;
+    assign input_if.rst_n = rst_n;
+
+    assign output_if.clk = clk;
+    assign output_if.rst_n = rst_n;
+
+    initial begin
+        clk <= 1'b0;
+        rst_n <= 1'b1;
         forever begin
-            #100 clk = ~clk;
+            #5 clk <= ~clk;
         end
     end
 
-    initial begin
+    /*initial begin
         rst_n = 1'b0;
         #1000;
         rst_n = 1'b1;
-    end
+    end*/
+
 endmodule
