@@ -20,10 +20,8 @@ class my_env extends uvm_env;
 
     function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
-        //my_pred.pred_scbd_ap.connect(my_scbd.pred_scbd_port);
         my_pred.pred_scbd_ap.connect(my_scbd.pred_scbd_imp);
         my_agt.my_mo.mon_pred_ap.connect(my_pred.mon_pred_imp);
-        //my_agt.my_mo.mon_scbd_ap.connect(my_scbd.mon_scbd_port);
         my_agt.my_mo.mon_scbd_ap.connect(my_scbd.mon_scbd_imp);
     endfunction
 

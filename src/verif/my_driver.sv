@@ -18,13 +18,11 @@ class my_driver extends uvm_driver#(my_transaction);
 
     virtual task run_phase(uvm_phase phase);
 
-        //phase.raise_objection(this);
         `uvm_info("my_driver", "main_phase is called", UVM_LOW);
         fork
             get_and_drive();
             rst_dut();
         join
-        //phase.drop_objection(this);
     endtask
 
     virtual task get_and_drive();

@@ -13,8 +13,4 @@ class my_tb extends uvm_env;
         env = my_env::type_id::create("env", this);
     endfunction
 
-    /*function connect_phase(uvm_phase phase);
-
-    endfunction*/
-
 endclass: my_tb

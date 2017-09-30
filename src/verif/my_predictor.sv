@@ -3,7 +3,6 @@ class my_predictor extends uvm_component;
     my_transaction input_trans;
     my_transaction output_trans;
 
-    //uvm_blocking_get_port#(my_transaction) mon_pred_port;
     `uvm_analysis_imp_decl(_mon_pred)
     uvm_analysis_imp_mon_pred#(my_transaction, my_predictor) mon_pred_imp;
     uvm_analysis_port#(my_transaction) pred_scbd_ap;
@@ -30,19 +29,4 @@ class my_predictor extends uvm_component;
         pred_scbd_ap.write(output_trans);
     endfunction
 
-    /*task run_phase(uvm_phase phase);
-        fork
-            do_prediction();
-        join
-    endtask
-
-    virtual task do_prediction();
-        input_trans = new();
-        output_trans = new();
-    
-        mon_pred_port.get(input_trans);
-        output_trans = input_trans;
-
-        pred_scbd_ap.write(output_trans);
-    endtask*/
 endclass
